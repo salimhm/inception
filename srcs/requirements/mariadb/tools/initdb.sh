@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#source ~/inception/srcs/.env
 echo $DB_NAME
 if [ ! -d "/var/lib/mysql/wpdb" ]; then
 	cat << lol > init

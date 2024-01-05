@@ -102,6 +102,20 @@ services:
     networks:
       - wp-app
 
+  backup:
+    container_name: backup
+    build:
+      context: ./requirements/bonus/backup
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - wp_files:/var/www/html
+    depends_on:
+      - wordpress
+      - mariadb
+    networks:
+      - wp-app
+
 volumes:
   wp_db:
     driver: local
