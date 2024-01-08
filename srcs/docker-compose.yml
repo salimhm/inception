@@ -9,8 +9,10 @@ services:
     restart: always
     ports:
       - "443:443"
+      - "1234:1234"
     volumes:
       - wp_files:/var/www/html
+      - portfolio_files:/var/www/portfolio
     depends_on:
       - mariadb
       - wordpress
@@ -116,6 +118,23 @@ services:
     networks:
       - wp-app
 
+  portfolio:
+    container_name: portfolio
+    build:
+      context: ./requirements/bonus/portfolio
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - portfolio_files:/var/www/portfolio/
+    ports:
+      - "1234"
+    depends_on:
+      - wordpress
+      - mariadb
+      - nginx
+    networks:
+      - wp-app    
+
 volumes:
   wp_db:
     driver: local
@@ -129,6 +148,12 @@ volumes:
       type: "none"
       o: "bind"
       device: "/home/shmimi/data/wp"
+  portfolio_files:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "/home/shmimi/data/portfolio"
 
 networks:
   wp-app:

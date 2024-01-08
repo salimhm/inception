@@ -7,6 +7,8 @@ RUN	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private
 
 COPY ./tools/wp.conf /etc/nginx/conf.d/
 
+COPY ./tools/portfolio.conf /etc/nginx/conf.d/
+
 WORKDIR	/etc/nginx/conf.d/
 
 EXPOSE 443
