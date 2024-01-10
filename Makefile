@@ -23,6 +23,7 @@ help:
 	@echo type "==>make up<==" to get started "(similar to make all but doesn't update if there was any)"
 	@echo type "==>make down<==" to remove any running container and volumes
 	@echo type "==>make all down<==" to remove and clean everything
+	@echo type "==>make re<==" to clean everything and build the containers from scratch
 all:	
 	$(mkdir)
 	cd srcs && docker compose up -d --build && cd ..
@@ -42,4 +43,5 @@ fclean:
 	docker system prune	
 	sudo rm -rf /home/shmimi/data
 
-.PHONY: help all up build down
+re:	fclean all
+.PHONY: help all up build down re
